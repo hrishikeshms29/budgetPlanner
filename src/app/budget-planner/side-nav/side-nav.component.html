@@ -1,0 +1,20 @@
+<div class="navbar">
+    <h2>
+        Personal Budget Manager
+    </h2>
+</div>
+<!-- //(click)="toggleSlideOut()" -->
+<div>
+    <div class="toggle-button-row" (click)="toggleSlideOut()">
+      <mat-icon>menu</mat-icon>
+    </div>
+</div>
+
+<div class="slide-out-panel" [class.slide-out]="isSlideOut">
+    <div class="slide-out-content">
+        <p class="edit-col "(click)="onDash()">DashBoard</p>
+        <p class="edit-col"(click)="onProfile()">Profile</p>
+        <p class="edit-col"(click)="onHistroy()">Prev Histroy</p>
+        <p class="edit-col"(click)="onLogout()">Logout</p>
+    </div>
+</div>

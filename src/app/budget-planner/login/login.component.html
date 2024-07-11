@@ -1,0 +1,57 @@
+<div class="navbar">
+  <h2>BUDGET PLANNER</h2>
+</div>
+
+<div class="login-container">
+  <!-- Login -->
+  <form *ngIf="activeForm === 'login'" [formGroup]="loginForm" (ngSubmit)="login()">
+    <h2>Login</h2>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" formControlName="email" placeholder="Email" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput type="password" formControlName="password" placeholder="Password" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Login</button>
+    <p (click)="toggleForm('register')">Don't have an account?
+      <span class="highlighted">Register</span>
+    </p>
+  </form>
+  <!-- Register -->
+  <form *ngIf="activeForm === 'register'" [formGroup]="registerForm" (ngSubmit)="register()">
+    <h2>Register</h2>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput type="text" formControlName="username" placeholder="Username" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" formControlName="email" placeholder="Email" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput type="password" formControlName="password" placeholder="Password" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" type="submit">Register</button>
+    <p (click)="toggleForm('login')">Already have an account?
+      <span class="highlighted">Login</span>
+    </p>
+  </form>
+</div>
