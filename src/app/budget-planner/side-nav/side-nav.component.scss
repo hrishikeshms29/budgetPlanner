@@ -1,23 +1,27 @@
-$primary-color: #008080;
-$secondary-color: #80ced6;
-$accent-color: #ffffff;
-$hover-color: #006666;
+$primary-color: #6a0dad; // Purple primary color
+$secondary-color: #a66ed9; // Purple secondary color
+$accent-color: #ffffff; // White accent color
+$hover-color: #4d0a83; // Darker purple for hover effect
 $shadow-color: rgba(0, 0, 0, 0.2);
 $hover-shadow-color: rgba(0, 0, 0, 0.3);
 
 .navbar {
   background: linear-gradient(135deg, $primary-color, $secondary-color);
-  padding: 10px 20px;
+  padding: 30px 20px; // Increased padding for height
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   color: $accent-color;
+  h2 {
+    margin: 0;
+    color: $accent-color; // Text color matches the accent color
+  }
 }
 
 .toggle-button-row {
   position: fixed;
-  top: 20px;
+  top: 30px; // Adjusted top position for better alignment
   left: 20px;
   display: flex;
   align-items: center;
@@ -35,11 +39,11 @@ $hover-shadow-color: rgba(0, 0, 0, 0.3);
     background: $hover-color;
     box-shadow: 0 2px 6px $hover-shadow-color;
   }
-}
 
-.toggle-button-row mat-icon {
-  font-size: 24px;
-  color: $primary-color;
+  mat-icon {
+    font-size: 24px;
+    color: $primary-color; // Icon color matches primary color
+  }
 }
 
 .slide-out-panel {
@@ -54,32 +58,39 @@ $hover-shadow-color: rgba(0, 0, 0, 0.3);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0 0 10px $shadow-color;
-}
 
-.slide-out-panel.slide-out {
-  transform: translateX(-100%);
-}
+  &.slide-out {
+    transform: translateX(-100%);
+  }
 
-.slide-out-content {
-  margin-top: 80px;
-  padding: 20px;
-}
+  .slide-out-content {
+    margin-top: 100px; // Increased margin-top for better spacing
+    padding: 20px;
 
-.edit-col {
-  color: $primary-color;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: $accent-color;
-  margin-bottom: 10px;
-  text-align: center;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    .edit-col {
+      color: $primary-color; // Text color matches primary color for visibility
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: $accent-color;
+      margin-bottom: 10px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 
-  &:hover {
-    background-color: $hover-color;
-    color: $accent-color;
-    box-shadow: 0 2px 4px $shadow-color;
+      &:hover {
+        background-color: $hover-color;
+        color: $accent-color;
+        box-shadow: 0 2px 4px $shadow-color;
+      }
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 20px;
+        vertical-align: middle;
+        color: $primary-color; // Icon color matches primary color
+      }
+    }
   }
 }
 

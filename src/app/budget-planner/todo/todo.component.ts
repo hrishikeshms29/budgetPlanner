@@ -14,26 +14,71 @@ import { Router } from '@angular/router';
 export class TodoComponent {
   todoForm: any;
   selectedMonth: any;
-  expenses: { month: string, expenseAmount: number }[] = [
-    { month: 'January', expenseAmount: 1500 },
-    { month: 'February', expenseAmount: 2000 },
-    { month: 'March', expenseAmount: 1800 }
-  ];
-  monthSelected: boolean = false;
+  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
   januaryExpense: any[] = [
     { expenseType: 'Recharge', expenseAmount: 1000 },
     { expenseType: 'Light Bills', expenseAmount: 500 },
-  ];
+];
 
-  februaryExpense: any[] = [
+februaryExpense: any[] = [
     { expenseType: 'Essentials', expenseAmount: 200 },
     { expenseType: 'Light Bills', expenseAmount: 400 }
-  ];
+];
 
-  marchExpense: any[] = [
+marchExpense: any[] = [
     { expenseType: 'Recharge', expenseAmount: 1100 },
     { expenseType: 'Essentials', expenseAmount: 250 }
-  ];
+];
+
+aprilExpense: any[] = [
+    { expenseType: 'Groceries', expenseAmount: 800 },
+    { expenseType: 'Transportation', expenseAmount: 300 }
+];
+
+mayExpense: any[] = [
+    { expenseType: 'Dining Out', expenseAmount: 500 },
+    { expenseType: 'Entertainment', expenseAmount: 200 }
+];
+
+juneExpense: any[] = [
+    { expenseType: 'Shopping', expenseAmount: 600 },
+    { expenseType: 'Utilities', expenseAmount: 350 }
+];
+
+julyExpense: any[] = [
+    { expenseType: 'Medical', expenseAmount: 400 },
+    { expenseType: 'Insurance', expenseAmount: 150 }
+];
+
+augustExpense: any[] = [
+    { expenseType: 'Vacation', expenseAmount: 1200 },
+    { expenseType: 'Miscellaneous', expenseAmount: 180 }
+];
+
+septemberExpense: any[] = [
+    { expenseType: 'Education', expenseAmount: 700 },
+    { expenseType: 'Charity', expenseAmount: 100 }
+];
+
+octoberExpense: any[] = [
+    { expenseType: 'Fitness', expenseAmount: 300 },
+    { expenseType: 'Pet Care', expenseAmount: 80 }
+];
+
+novemberExpense: any[] = [
+    { expenseType: 'Home Improvement', expenseAmount: 900 },
+    { expenseType: 'Taxes', expenseAmount: 400 }
+];
+
+decemberExpense: any[] = [
+    { expenseType: 'Gifts', expenseAmount: 600 },
+    { expenseType: 'Holiday Expenses', expenseAmount: 300 }
+];
+
+
+  monthSelected: boolean = false;
+
   constructor(private fb: FormBuilder, private router: Router) {
     const currentDate = new Date();
     const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
@@ -95,23 +140,10 @@ export class TodoComponent {
 
   calculateTotalExpense(month: string): number {
     let totalExpense = 0;
-    for (const income of this.gettodoFormonth(month)) {
+    for (const income of this.getFilteredExpenses()) {
       totalExpense += income.expenseAmount;
     }
     return totalExpense;
-  }
-
-  gettodoFormonth(month: string): any[] {
-    switch (month) {
-      case 'January':
-        return this.januaryExpense;
-      case 'February':
-        return this.februaryExpense;
-      case 'March':
-        return this.marchExpense;
-      default:
-        return [];
-    }
   }
 
   onSave() {
@@ -132,5 +164,4 @@ export class TodoComponent {
 
   toggleSelection(expense: any) {
     expense.selected = !expense.selected;
-  }
-}
+  }}

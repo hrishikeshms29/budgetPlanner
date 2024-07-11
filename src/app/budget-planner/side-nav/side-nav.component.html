@@ -3,18 +3,26 @@
         Personal Budget Manager
     </h2>
 </div>
-<!-- //(click)="toggleSlideOut()" -->
+
 <div>
     <div class="toggle-button-row" (click)="toggleSlideOut()">
-      <mat-icon>menu</mat-icon>
+        <mat-icon>menu</mat-icon>
     </div>
 </div>
 
 <div class="slide-out-panel" [class.slide-out]="isSlideOut">
     <div class="slide-out-content">
-        <p class="edit-col "(click)="onDash()">DashBoard</p>
-        <p class="edit-col"(click)="onProfile()">Profile</p>
-        <p class="edit-col"(click)="onHistroy()">Prev Histroy</p>
-        <p class="edit-col"(click)="onLogout()">Logout</p>
+        <p class="edit-col" (click)="onDash()">
+            <mat-icon>dashboard</mat-icon> Dashboard
+        </p>
+        <p class="edit-col" (click)="onProfile()">
+            <mat-icon>person</mat-icon> Profile
+        </p>
+        <p class="edit-col" (click)="onHistroy()">
+            <mat-icon>history</mat-icon> Previous History
+        </p>
+        <p class="edit-col" (click)="onLogout()">
+            <mat-icon>exit_to_app</mat-icon> Logout
+        </p>
     </div>
 </div>
