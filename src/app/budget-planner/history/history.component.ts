@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { SideNavComponent } from '../side-nav/side-nav.component';
@@ -12,33 +12,68 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
-export class HistoryComponent {
-  todoForm: any;
+export class HistoryComponent {todoForm!: FormGroup;
   selectedMonth: string;
-  expenses: { month: string, expenseAmount: number }[] = [
-    { month: 'January', expenseAmount: 1500 },
-    { month: 'February', expenseAmount: 2000 },
-    { month: 'March', expenseAmount: 1800 }
-  ];
-  monthSelected: boolean = false;
-  januaryExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1000 },
-    { expenseType: 'Light Bills', expenseAmount: 500 },
-  ];
-  februaryExpense: any[] = [
-    { expenseType: 'Essentials', expenseAmount: 200 },
-    { expenseType: 'Light Bills', expenseAmount: 400 }
-  ];
-  marchExpense: any[] = [
-    { expenseType: 'Recharge', expenseAmount: 1100 },
-    { expenseType: 'Essentials', expenseAmount: 250 }
-  ];
+  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  // Define expenses for all months
+  expenses: any = {
+    January: [
+      { expenseType: 'Recharge', expenseAmount: 1000 },
+      { expenseType: 'Light Bills', expenseAmount: 500 },
+    ],
+    February: [
+      { expenseType: 'Essentials', expenseAmount: 200 },
+      { expenseType: 'Light Bills', expenseAmount: 400 }
+    ],
+    March: [
+      { expenseType: 'Recharge', expenseAmount: 1100 },
+      { expenseType: 'Essentials', expenseAmount: 250 }
+    ],
+    April: [
+      { expenseType: 'Rent', expenseAmount: 1200 },
+      { expenseType: 'Groceries', expenseAmount: 300 }
+    ],
+    May: [
+      { expenseType: 'Utilities', expenseAmount: 900 },
+      { expenseType: 'Groceries', expenseAmount: 350 }
+    ],
+    June: [
+      { expenseType: 'Rent', expenseAmount: 1000 },
+      { expenseType: 'Light Bills', expenseAmount: 400 }
+    ],
+    July: [
+      { expenseType: 'Recharge', expenseAmount: 950 },
+      { expenseType: 'Essentials', expenseAmount: 200 }
+    ],
+    August: [
+      { expenseType: 'Rent', expenseAmount: 1100 },
+      { expenseType: 'Utilities', expenseAmount: 300 }
+    ],
+    September: [
+      { expenseType: 'Groceries', expenseAmount: 400 },
+      { expenseType: 'Light Bills', expenseAmount: 350 }
+    ],
+    October: [
+      { expenseType: 'Rent', expenseAmount: 1050 },
+      { expenseType: 'Essentials', expenseAmount: 250 }
+    ],
+    November: [
+      { expenseType: 'Utilities', expenseAmount: 800 },
+      { expenseType: 'Light Bills', expenseAmount: 400 }
+    ],
+    December: [
+      { expenseType: 'Recharge', expenseAmount: 1150 },
+      { expenseType: 'Groceries', expenseAmount: 300 }
+    ]
+  };
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.selectedMonth = new Date().toLocaleString('default', { month: 'long' });
+    this.selectedMonth = this.getMonthName(new Date().getMonth());
+    this.createForm();
   }
 
-  ngOnInit(): void {
+  createForm() {
     this.todoForm = this.fb.group({
       month: ['', Validators.required],
       expenseType: ['', Validators.required],
@@ -56,25 +91,15 @@ export class HistoryComponent {
 
   onChangeExpense(event: any) {
     this.selectedMonth = event.target.value;
-    this.monthSelected = true;
     this.getFilteredExpenses();
   }
 
   getFilteredExpenses() {
-    switch (this.selectedMonth) {
-      case 'January':
-        return this.januaryExpense;
-      case 'February':
-        return this.februaryExpense;
-      case 'March':
-        return this.marchExpense;
-      default:
-        return [];
-    }
+    return this.expenses[this.selectedMonth];
   }
 
   calculateTotalExpense(month: string): number {
-    return this.getFilteredExpenses().reduce((acc, curr) => acc + curr.expenseAmount, 0);
+    return this.expenses[month].reduce((acc: number, curr: any) => acc + curr.expenseAmount, 0);
   }
 
   onSave() {
@@ -90,5 +115,9 @@ export class HistoryComponent {
 
   onBack() {
     this.router.navigate(['/budget-planner/dashboard']);
+  }
+
+  private getMonthName(monthIndex: number): string {
+    return this.months[monthIndex];
   }
 }

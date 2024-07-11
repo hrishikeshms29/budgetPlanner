@@ -1,7 +1,5 @@
 <div class="navbar">
-    <h2>
-        EXPENSE
-    </h2>
+    <h2>EXPENSE</h2>
 </div>
 
 <div class="main-container">
@@ -11,12 +9,8 @@
             <div class="form-group">
                 <select formControlName="month" id="month" class="form-control" (change)="onChangeExpense($event)">
                     <option value="" disabled>Select Month</option>
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
+                    <option *ngFor="let month of months" [value]="month">{{ month }}</option>
                 </select>
-            </div>
-            <div class="form-group">
             </div>
             <div class="total-expense">
                 Total expense for {{ selectedMonth }}: ${{ calculateTotalExpense(selectedMonth) }}
@@ -26,15 +20,18 @@
                 <select formControlName="expenseType" id="expenseType" class="form-control"
                     [class.disabled-dropdown]="!monthSelected">
                     <option value="" disabled>Select Expense Type</option>
-                    <option value="Rent">Rent</option>
-                    <option value="Groceries">Groceries</option>
-                    <option value="Utilities">Utilities</option>
+                    <option *ngFor="let type of expenseTypes" [value]="type">{{ type }}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="expenseAmount">Amount:</label>
                 <input type="number" formControlName="expenseAmount" id="expenseAmount" class="form-control"
                     placeholder="Enter amount" [class.disabled-dropdown]="!monthSelected">
+            </div>
+            <div class="form-group">
+                <label for="expenseDate">Expense Date:</label>
+                <input type="date" formControlName="expenseDate" id="expenseDate" class="form-control"
+                    [class.disabled-dropdown]="!monthSelected">
             </div>
             <button type="submit" class="btn btn-primary" (click)="onSubmitExpense()"
                 [class.disabled-dropdown]="!monthSelected">Add Expense</button>
@@ -46,12 +43,14 @@
                 <tr>
                     <th>Expense Type</th>
                     <th>Amount</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let expense of getFilteredExpenses()">
                     <td>{{ expense.expenseType }}</td>
                     <td>{{ expense.expenseAmount }}</td>
+                    <td>{{ expense.expenseDate }}</td>
                 </tr>
             </tbody>
         </table>

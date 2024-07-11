@@ -8,6 +8,7 @@ import { IncomeComponent } from './income/income.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HistoryComponent } from './history/history.component';
+import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'income',component:IncomeComponent},
   {path:'expense',component:ExpenseComponent},
   {path:'history',component:HistoryComponent},
-  {path:'profile',component:ProfileComponent}
+  {path:'profile',component:ProfileComponent},
+  {path:'todo',component:TodoComponent}
 ];
 
 @NgModule({
